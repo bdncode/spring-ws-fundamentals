@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://code.bdn/springwsfundamentals/model"
+                  targetNamespace="http://code.bdn/springwsfundamentals/model">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://code.bdn/springwsfundamentals/model">
+
+    <xs:element name="GetAlbumRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetAlbumResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="album" type="tns:album"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="album">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="artist" type="xs:string"/>
+            <xs:element name="year" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAlbumRequest">
+    <wsdl:part element="tns:GetAlbumRequest" name="GetAlbumRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAlbumResponse">
+    <wsdl:part element="tns:GetAlbumResponse" name="GetAlbumResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ServicePort">
+    <wsdl:operation name="GetAlbum">
+      <wsdl:input message="tns:GetAlbumRequest" name="GetAlbumRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAlbumResponse" name="GetAlbumResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServicePortSoap11" type="tns:ServicePort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetAlbum">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAlbumRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAlbumResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicePortService">
+    <wsdl:port binding="tns:ServicePortSoap11" name="ServicePortSoap11">
+      <soap:address location="http://localhost:8080/soap-ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

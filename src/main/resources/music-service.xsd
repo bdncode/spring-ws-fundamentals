@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://code.bdn/springwsfundamentals/model"
+           targetNamespace="http://code.bdn/springwsfundamentals/model"
+           elementFormDefault="qualified">
+
+    <xs:element name="GetAlbumRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetAlbumResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="album" type="tns:album" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="album">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="artist" type="xs:string" />
+            <xs:element name="year" type="xs:int" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
